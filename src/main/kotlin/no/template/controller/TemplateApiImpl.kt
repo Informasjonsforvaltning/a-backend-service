@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod.GET
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import javax.validation.ConstraintViolationException
+import org.springframework.security.access.prepost.PreAuthorize;
+
+
 
 private val LOGGER = LoggerFactory.getLogger(TemplateApiImpl::class.java)
 
@@ -31,6 +34,7 @@ open class TemplateApiImpl (
     fun ready(): ResponseEntity<Void> =
         ResponseEntity.ok().build()
 
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     override fun createTemplateObject(httpServletRequest: HttpServletRequest, templateObject: TemplateObject): ResponseEntity<Void> =
         try {
             HttpHeaders()

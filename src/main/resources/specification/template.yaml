@@ -25,6 +25,9 @@ paths:
       tags:
         - template
       summary: Create a new template object
+      security:
+        - openId:
+          - template_write
       operationId: createTemplateObject
       responses:
         '201':
@@ -71,6 +74,9 @@ paths:
       tags:
         - template
       description: Get a specific template object by id
+      security:
+        - openId:
+          - template_read
       operationId: getTemplateObjectById
       parameters:
         - name: id
@@ -96,6 +102,9 @@ paths:
       tags:
         - template
       description: Update a specific template object by id
+      security:
+        - openId:
+          - template_write
       operationId: updateTemplateObject
       parameters:
         - name: id
@@ -132,3 +141,7 @@ components:
         name:
           type: string
           description: The name of the template object
+  securitySchemes:
+    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
